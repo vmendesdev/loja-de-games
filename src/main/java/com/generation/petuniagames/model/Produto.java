@@ -1,5 +1,6 @@
 package com.generation.petuniagames.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -29,12 +30,6 @@ public class Produto {
 	@Size(min = 5, max = 150, message = "O atributo Descrição deve cconter no mínimo 05 e no máximo 150 caracteres")
 	private String descricao;
 	
-	@NotBlank(message = "O atributo Categoria é Obrigatório!")
-	@Size(min = 5, max= 15, message = "O atributo Categoria deve conter no mínimo 05 e no máximo 15 caracteres!")
-	@ManyToOne
-	@JsonIgnoreProperties("produto")
-	private Categoria categoria;
-	
 	@NotNull
 	@Min(value = 0, message ="O Preço deve ser maior ou igual a zero!")
 	private float preco;
@@ -46,10 +41,6 @@ public class Produto {
 	//Getters and Setters
 	public Long getId() {
 		return id;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public void setId(Long id) {
@@ -86,6 +77,18 @@ public class Produto {
 
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
+	}
+	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }
